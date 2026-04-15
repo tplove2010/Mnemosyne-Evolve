@@ -1,0 +1,25 @@
+{
+  "review_mode": true,
+  "sources": {
+    "feishu": true,
+    "heartbeat": true,
+    "compaction": true,
+    "execution_outcome": true,
+    "published_memory": true
+  },
+  "thresholds": {
+    "min_repeat_count": 2,
+    "min_score": 3,
+    "prefer_explicit": true
+  },
+  "weights": {
+    "style_preference": 4,
+    "failure_avoidance": 4,
+    "workflow_rule": 3,
+    "task_tactic": 2,
+    "recall_hint": 2
+  },
+  "recall": {
+    "default_limit": 8
+  }
+}
