@@ -1,6 +1,18 @@
-# Mnemosyne Evolve 1.0 / Mnemosyne Evolve 1.0
+# Mnemosyne Evolve 1.0
 
 > English below | 中文说明见下方
+
+---
+
+## 定位说明 | Positioning
+
+**Mnemosyne Evolve 就像是 OpenClaw 的「复盘教练 + 经验笔记员」。**
+
+它会把你和 AI 日常互动里那些做得对的方式、做错的坑、你反复强调的风格要求整理出来，慢慢让 AI 更懂你、少犯老错误、越来越贴近你的做事方式。
+
+**Mnemosyne Evolve is like OpenClaw's "Review Coach + Experience Note-taker".**
+
+It organizes how you interact with the AI daily — what works well, what mistakes to avoid, your repeated style preferences — gradually making the AI understand you better, avoid recurring mistakes, and align more closely with your working style.
 
 ---
 
