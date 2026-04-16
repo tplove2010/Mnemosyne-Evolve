@@ -49,44 +49,46 @@ Generates these pattern types:
 
 #### Windows
 ```powershell
-# Copy scripts
-Copy-Item -Path ".\scripts\*" -Destination "$env:USERPROFILE\.openclaw\workspace\scripts\" -Recurse
+# Copy scripts to evolve directory
+New-Item -ItemType Directory -Path "$env:USERPROFILE\.openclaw\workspace\scripts\evolve" -Force
+Copy-Item -Path ".\scripts\evolve\*" -Destination "$env:USERPROFILE\.openclaw\workspace\scripts\evolve\"
 
 # Initialize runtime
-python "$env:USERPROFILE\.openclaw\workspace\scripts\init_runtime.py" "$env:USERPROFILE\.openclaw\workspace"
+python "$env:USERPROFILE\.openclaw\workspace\scripts\evolve\init_runtime.py" "$env:USERPROFILE\.openclaw\workspace"
 ```
 
 #### macOS / Linux
 ```bash
-# Copy scripts
-cp -r ./scripts/* ~/.openclaw/workspace/scripts/
+# Copy scripts to evolve directory
+mkdir -p ~/.openclaw/workspace/scripts/evolve
+cp -r ./scripts/evolve/* ~/.openclaw/workspace/scripts/evolve/
 
 # Initialize runtime
-python ~/.openclaw/workspace/scripts/init_runtime.py ~/.openclaw/workspace
+python ~/.openclaw/workspace/scripts/evolve/init_runtime.py ~/.openclaw/workspace
 ```
 
 ### Operating Workflow
 
 ```bash
 # 1. Initialize (once)
-python scripts/init_runtime.py <workspace>
+python scripts/evolve/init_runtime.py <workspace>
 
 # 2. Ingest events
-python scripts/ingest_event.py <workspace> <event-file>
+python scripts/evolve/ingest_event.py <workspace> <event-file>
 
 # 3. Synthesize patterns
-python scripts/synthesize_patterns.py <workspace>
+python scripts/evolve/synthesize_patterns.py <workspace>
 
 # 4. Review candidates (see .mnemosyne-evolve/review/evolution-candidates.md)
 
 # 5. Approve patterns
-python scripts/approve_patterns.py <workspace> --ids <pattern-id> --apply
+python scripts/evolve/approve_patterns.py <workspace> --ids <pattern-id> --apply
 
 # 6. Build recall pack for next task
-python scripts/build_recall_pack.py <workspace> --query "your task"
+python scripts/evolve/build_recall_pack.py <workspace> --query "your task"
 
 # 7. Check status
-python scripts/report_status.py <workspace>
+python scripts/evolve/report_status.py <workspace>
 ```
 
 ### Relationship with Mnemosyne Pro
@@ -131,30 +133,32 @@ Mnemosyne Evolve 是 OpenClaw 的**实验性自适应层**。它构建在 Mnemos
 
 #### Windows
 ```powershell
-# 复制脚本
-Copy-Item -Path ".\scripts\*" -Destination "$env:USERPROFILE\.openclaw\workspace\scripts\" -Recurse
+# 复制脚本到 evolve 目录
+New-Item -ItemType Directory -Path "$env:USERPROFILE\.openclaw\workspace\scripts\evolve" -Force
+Copy-Item -Path ".\scripts\evolve\*" -Destination "$env:USERPROFILE\.openclaw\workspace\scripts\evolve\"
 
 # 初始化运行时
-python "$env:USERPROFILE\.openclaw\workspace\scripts\init_runtime.py" "$env:USERPROFILE\.openclaw\workspace"
+python "$env:USERPROFILE\.openclaw\workspace\scripts\evolve\init_runtime.py" "$env:USERPROFILE\.openclaw\workspace"
 ```
 
 #### macOS / Linux
 ```bash
-# 复制脚本
-cp -r ./scripts/* ~/.openclaw/workspace/scripts/
+# 复制脚本到 evolve 目录
+mkdir -p ~/.openclaw/workspace/scripts/evolve
+cp -r ./scripts/evolve/* ~/.openclaw/workspace/scripts/evolve/
 
 # 初始化运行时
-python ~/.openclaw/workspace/scripts/init_runtime.py ~/.openclaw/workspace
+python ~/.openclaw/workspace/scripts/evolve/init_runtime.py ~/.openclaw/workspace
 ```
 
 ### 操作流程
 
 ```bash
 # 1. 初始化（仅一次）
-python scripts/init_runtime.py <workspace>
+python scripts/evolve/init_runtime.py <workspace>
 
 # 2. 摄入事件
-python scripts/ingest_event.py <workspace> <event-file>
+python scripts/evolve/ingest_event.py <workspace> <event-file>
 
 # 3. 合成模式
 python scripts/synthesize_patterns.py <workspace>
