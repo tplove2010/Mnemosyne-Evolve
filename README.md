@@ -1,4 +1,4 @@
-# Mnemosyne Evolve 1.0
+# Mnemosyne Evolve 1.1
 
 > English below | 中文说明见下方
 
@@ -205,6 +205,32 @@ mnemosyne-evolve/
 ---
 
 ## 更新日志 / Changelog
+
+### 1.1 (2026-04-17) - 嵌入增强版
+
+#### 新增特性：语义嵌入增强
+
+1. **语义 Pattern 聚类 (semantic_pattern_merge)**
+   - 基于 embedding 相似度自动合并相似事件
+   - 配置: `min_similarity: 0.80`
+   - 输出: `semantic_cluster_hint` 建议
+
+2. **语义 Recall 检索 (semantic_recall)**
+   - 使用 BGE-M3 embedding 进行语义搜索
+   - 配置: `top_k: 5`, `min_similarity: 0.6`
+   - fallback: keyword 搜索
+
+3. **事件语义分类 (semantic_event_classification)**
+   - 对无明确 keyword 的事件使用 embedding 分类
+   - 支持 5 种类型: style_preference, failure_avoidance, workflow_rule, task_tactic, recall_hint
+   - method: keyword → embedding fallback
+
+#### 验证结果
+- Success/Failure 聚类相似度: 89.15% / 85.71%
+- 分类测试: 7/7 通过
+- Keyword 占比: 71%, Embedding 占比: 29%
+
+---
 
 ### 1.0 (2026-04-16)
 - 初始版本 / Initial release
