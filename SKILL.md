@@ -24,7 +24,7 @@ Treat Mnemosyne Evolve as a separate layer above `mnemosyne-pro`.
 
 ## Supported input signals
 
-Version 1.0 observes exactly these signal classes:
+Version 1.1 observes exactly these signal classes:
 
 1. Feishu conversations
 2. heartbeat summaries
@@ -80,7 +80,7 @@ Use these pattern types:
 
 ## Scoring rules
 
-Version 1.0 should favor these priorities:
+Version 1.1 should favor these priorities:
 1. owner style fit
 2. repeated success or repeated failure evidence
 3. workflow consistency

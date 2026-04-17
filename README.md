@@ -49,9 +49,16 @@ Generates these pattern types:
 
 #### Windows
 ```powershell
-# Copy scripts to evolve directory
+# Copy all scripts (evolve/* + common utilities)
 New-Item -ItemType Directory -Path "$env:USERPROFILE\.openclaw\workspace\scripts\evolve" -Force
 Copy-Item -Path ".\scripts\evolve\*" -Destination "$env:USERPROFILE\.openclaw\workspace\scripts\evolve\"
+Copy-Item -Path ".\scripts\common.py" -Destination "$env:USERPROFILE\.openclaw\workspace\scripts\"
+Copy-Item -Path ".\scripts\embedding_client.py" -Destination "$env:USERPROFILE\.openclaw\workspace\scripts\"
+Copy-Item -Path ".\scripts\semantic_utils.py" -Destination "$env:USERPROFILE\.openclaw\workspace\scripts\"
+
+# Copy assets (default config)
+New-Item -ItemType Directory -Path "$env:USERPROFILE\.openclaw\workspace\assets" -Force
+Copy-Item -Path ".\assets\mnemosyne-evolve.config.jsonc" -Destination "$env:USERPROFILE\.openclaw\workspace\assets\"
 
 # Initialize runtime
 python "$env:USERPROFILE\.openclaw\workspace\scripts\evolve\init_runtime.py" "$env:USERPROFILE\.openclaw\workspace"
@@ -59,9 +66,16 @@ python "$env:USERPROFILE\.openclaw\workspace\scripts\evolve\init_runtime.py" "$e
 
 #### macOS / Linux
 ```bash
-# Copy scripts to evolve directory
+# Copy all scripts (evolve/* + common utilities)
 mkdir -p ~/.openclaw/workspace/scripts/evolve
 cp -r ./scripts/evolve/* ~/.openclaw/workspace/scripts/evolve/
+cp ./scripts/common.py ~/.openclaw/workspace/scripts/
+cp ./scripts/embedding_client.py ~/.openclaw/workspace/scripts/
+cp ./scripts/semantic_utils.py ~/.openclaw/workspace/scripts/
+
+# Copy assets (default config)
+mkdir -p ~/.openclaw/workspace/assets
+cp ./assets/mnemosyne-evolve.config.jsonc ~/.openclaw/workspace/assets/
 
 # Initialize runtime
 python ~/.openclaw/workspace/scripts/evolve/init_runtime.py ~/.openclaw/workspace
@@ -95,8 +109,8 @@ python scripts/evolve/report_status.py <workspace>
 
 | Layer | Writes To | Purpose |
 |-------|-----------|---------|
-| Mnemosyne Pro 1.2 | `memory/*.md` | Durable memory correctness |
-| Mnemosyne Evolve 1.0 | `.mnemosyne-evolve/` | Experimental adaptation |
+| Mnemosyne Pro 1.3 | `memory/*.md` | Durable memory correctness |
+| Mnemosyne Evolve 1.1 | `.mnemosyne-evolve/` | Experimental adaptation |
 
 ---
 
@@ -133,9 +147,16 @@ Mnemosyne Evolve 是 OpenClaw 的**实验性自适应层**。它构建在 Mnemos
 
 #### Windows
 ```powershell
-# 复制脚本到 evolve 目录
+# 复制所有脚本（evolve/* + 公共工具）
 New-Item -ItemType Directory -Path "$env:USERPROFILE\.openclaw\workspace\scripts\evolve" -Force
 Copy-Item -Path ".\scripts\evolve\*" -Destination "$env:USERPROFILE\.openclaw\workspace\scripts\evolve\"
+Copy-Item -Path ".\scripts\common.py" -Destination "$env:USERPROFILE\.openclaw\workspace\scripts\"
+Copy-Item -Path ".\scripts\embedding_client.py" -Destination "$env:USERPROFILE\.openclaw\workspace\scripts\"
+Copy-Item -Path ".\scripts\semantic_utils.py" -Destination "$env:USERPROFILE\.openclaw\workspace\scripts\"
+
+# 复制 assets（默认配置）
+New-Item -ItemType Directory -Path "$env:USERPROFILE\.openclaw\workspace\assets" -Force
+Copy-Item -Path ".\assets\mnemosyne-evolve.config.jsonc" -Destination "$env:USERPROFILE\.openclaw\workspace\assets\"
 
 # 初始化运行时
 python "$env:USERPROFILE\.openclaw\workspace\scripts\evolve\init_runtime.py" "$env:USERPROFILE\.openclaw\workspace"
@@ -143,9 +164,16 @@ python "$env:USERPROFILE\.openclaw\workspace\scripts\evolve\init_runtime.py" "$e
 
 #### macOS / Linux
 ```bash
-# 复制脚本到 evolve 目录
+# 复制所有脚本（evolve/* + 公共工具）
 mkdir -p ~/.openclaw/workspace/scripts/evolve
 cp -r ./scripts/evolve/* ~/.openclaw/workspace/scripts/evolve/
+cp ./scripts/common.py ~/.openclaw/workspace/scripts/
+cp ./scripts/embedding_client.py ~/.openclaw/workspace/scripts/
+cp ./scripts/semantic_utils.py ~/.openclaw/workspace/scripts/
+
+# 复制 assets（默认配置）
+mkdir -p ~/.openclaw/workspace/assets
+cp ./assets/mnemosyne-evolve.config.jsonc ~/.openclaw/workspace/assets/
 
 # 初始化运行时
 python ~/.openclaw/workspace/scripts/evolve/init_runtime.py ~/.openclaw/workspace
@@ -161,26 +189,26 @@ python scripts/evolve/init_runtime.py <workspace>
 python scripts/evolve/ingest_event.py <workspace> <event-file>
 
 # 3. 合成模式
-python scripts/synthesize_patterns.py <workspace>
+python scripts/evolve/synthesize_patterns.py <workspace>
 
 # 4. 审核候选（查看 .mnemosyne-evolve/review/evolution-candidates.md）
 
 # 5. 批准模式
-python scripts/approve_patterns.py <workspace> --ids <pattern-id> --apply
+python scripts/evolve/approve_patterns.py <workspace> --ids <pattern-id> --apply
 
 # 6. 为下一任务构建记忆包
-python scripts/build_recall_pack.py <workspace> --query "你的任务"
+python scripts/evolve/build_recall_pack.py <workspace> --query "你的任务"
 
 # 7. 查看状态
-python scripts/report_status.py <workspace>
+python scripts/evolve/report_status.py <workspace>
 ```
 
 ### 与 Mnemosyne Pro 的关系
 
 | 层级 | 写入位置 | 用途 |
 |------|----------|------|
-| Mnemosyne Pro 1.2 | `memory/*.md` | 持久记忆治理 |
-| Mnemosyne Evolve 1.0 | `.mnemosyne-evolve/` | 实验性自适应 |
+| Mnemosyne Pro 1.3 | `memory/*.md` | 持久记忆治理 |
+| Mnemosyne Evolve 1.1 | `.mnemosyne-evolve/` | 实验性自适应 |
 
 ---
 

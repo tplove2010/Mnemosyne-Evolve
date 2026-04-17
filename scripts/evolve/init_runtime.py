@@ -10,14 +10,15 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from common import ensure_text
 
-# Try multiple possible config locations
-SCRIPT_DIR = Path(__file__).resolve().parents[0]
-WORKSPACE_DIR = Path(__file__).resolve().parents[1]
+# Try multiple possible config locations (in priority order)
+SCRIPT_DIR = Path(__file__).resolve().parents[0]  # scripts/evolve/
+REPO_ROOT = Path(__file__).resolve().parents[2]  # repo root
+ASSETS_DIR = REPO_ROOT / 'assets'  # repo root/assets/
+WORKSPACE_DIR = REPO_ROOT  # workspace (repo root)
 
 DEFAULT_CONFIG_LOCATIONS = [
-    SCRIPT_DIR / 'mnemosyne-evolve.config.jsonc',  # In scripts/ folder
+    ASSETS_DIR / 'mnemosyne-evolve.config.jsonc',  # Correct: assets/ path
     WORKSPACE_DIR / '.mnemosyne-evolve' / 'config.jsonc',  # In workspace .mnemosyne-evolve/
-    SCRIPT_DIR.parent / 'assets' / 'mnemosyne-evolve.config.jsonc',  # Original source path
 ]
 
 DEFAULT_CONFIG = None
