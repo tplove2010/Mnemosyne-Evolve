@@ -91,6 +91,9 @@ python ~/.openclaw/workspace/scripts/evolve/init_runtime.py ~/.openclaw/workspac
 **Enhanced Mode (Optional)** - Requires manual activation
 - Needs embedding service (BGE-M3)
 - Features: semantic recall, semantic clustering, semantic classification
+- **Prerequisites**: Configure OpenClaw embedding in `openclaw.json`
+- Without valid config, Enhanced mode auto-disables with warning (no crash)
+
 - To enable, add to `.mnemosyne-evolve/config.jsonc`:
 ```json
 {
@@ -103,6 +106,7 @@ python ~/.openclaw/workspace/scripts/evolve/init_runtime.py ~/.openclaw/workspac
 }
 ```
 - Verify: check `recall-pack.json` for `"semantic_enhanced": true`
+- If embedding unavailable: graceful fallback to Core mode
 
 ### Operating Workflow
 

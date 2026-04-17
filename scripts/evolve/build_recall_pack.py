@@ -16,7 +16,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from common import dump_json, load_config, load_json, now_iso, tokenize
-from embedding_client import find_similar
+from embedding_client import check_embedding_available, find_similar
 from semantic_utils import PATTERN_PRIORITY, rank_recall_results
 
 
@@ -37,6 +37,15 @@ def main() -> int:
     # 加载语义配置
     sem_config = config.get('semantic_recall', {})
     semantic_enabled = not args.keyword_only and sem_config.get('enabled', False)
+    
+    # Preflight check: 验证 embedding 服务可用性
+    if semantic_enabled:
+        available, reason = check_embedding_available()
+        if not available:
+            print(f"[WARN] Semantic recall disabled: {reason}")
+            print(f"[INFO] Falling back to keyword-only mode. Use --keyword-only to suppress this warning.")
+            semantic_enabled = False
+    
     sem_top_k = sem_config.get('top_k', 5)
     sem_min_sim = sem_config.get('min_similarity', 0.6)
 

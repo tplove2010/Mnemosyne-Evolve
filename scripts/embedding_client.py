@@ -45,6 +45,38 @@ def get_embedding_config() -> dict:
     }
 
 
+def check_embedding_available() -> tuple[bool, str]:
+    """
+    检查 embedding 服务是否可用。
+    返回 (available: bool, reason: str)
+    """
+    cfg = get_embedding_config()
+    
+    # 检查 API key
+    if not cfg.get('api_key'):
+        return False, "No API key configured in OpenClaw (agents.defaults.memorySearch.remote.apiKey)"
+    
+    # 检查 base_url
+    if not cfg.get('base_url'):
+        return False, "No base_url configured"
+    
+    # 检查 provider 可访问性（简单测试）
+    try:
+        import requests
+        # 发送轻量级请求测试连接
+        test_url = cfg['base_url'].rstrip('/') + '/models'
+        resp = requests.get(test_url, headers={'Authorization': f"Bearer {cfg['api_key']}"}, timeout=5)
+        if resp.status_code != 200:
+            return False, f"Embedding service returned status {resp.status_code}"
+    except ImportError:
+        # requests未安装，给出警告但继续尝试
+        return True, "requests not installed, skipping connectivity check"
+    except Exception as e:
+        return False, f"Cannot connect to embedding service: {str(e)}"
+    
+    return True, "OK"
+
+
 def compute_text_hash(text: str) -> str:
     """计算文本 hash"""
     return hashlib.sha256(text.encode('utf-8')).hexdigest()[:16]

@@ -16,6 +16,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from common import dump_json, load_config, load_json, now_iso, score_pattern, slugify
+from embedding_client import check_embedding_available
 from semantic_utils import (
     PATTERN_PRIORITY,
     classify_event_type,
@@ -38,6 +39,15 @@ def main() -> int:
     # 加载嵌入配置
     sem_config = config.get('semantic_pattern_merge', {})
     semantic_enabled = not args.skip_semantic and sem_config.get('enabled', False)
+    
+    # Preflight check: 验证 embedding 服务可用性
+    if semantic_enabled:
+        available, reason = check_embedding_available()
+        if not available:
+            print(f"[WARN] Semantic pattern merge disabled: {reason}")
+            print(f"[INFO] Falling back to keyword-only mode. Set --skip-semantic to suppress this warning.")
+            semantic_enabled = False
+    
     min_similarity = sem_config.get('min_similarity', 0.8)
     
     grouped: dict[tuple[str, str], list[dict]] = defaultdict(list)

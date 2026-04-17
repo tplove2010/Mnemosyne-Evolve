@@ -34,6 +34,26 @@ Treat Mnemosyne Evolve as a separate layer above `mnemosyne-pro`.
 - **Manual activation required**
 - Requires embedding service (BGE-M3)
 - Features: semantic recall, semantic clustering, semantic classification
+
+**Prerequisites for Enhanced Mode**:
+1. OpenClaw must have embedding configuration in `openclaw.json`:
+   ```json
+   {
+     "agents": {
+       "defaults": {
+         "memorySearch": {
+           "model": "BAAI/bge-m3",
+           "remote": {
+             "baseUrl": "https://api.siliconflow.cn/v1",
+             "apiKey": "your-api-key"
+           }
+         }
+       }
+     }
+   }
+   ```
+2. Without valid config, Enhanced mode will auto-disable with warning
+
 - To enable, add to `.mnemosyne-evolve/config.jsonc`:
 **Enhanced Mode** is for Evolve-specific semantic capabilities (different from Pro):
 
