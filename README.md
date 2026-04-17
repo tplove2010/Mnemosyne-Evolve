@@ -81,6 +81,25 @@ cp ./assets/mnemosyne-evolve.config.jsonc ~/.openclaw/workspace/assets/
 python ~/.openclaw/workspace/scripts/evolve/init_runtime.py ~/.openclaw/workspace
 ```
 
+### Core vs Enhanced Mode
+
+**Core Mode (Default)** - Enabled automatically
+- Keyword-based pattern matching
+- No embedding dependency
+- Full workflow: ingest → synthesize → approve → recall → report
+
+**Enhanced Mode (Optional)** - Requires manual activation
+- Needs embedding service (BGE-M3)
+- Features: semantic recall, semantic clustering, semantic classification
+- To enable, add to `.mnemosyne-evolve/config.jsonc`:
+```json
+{
+  "semantic_recall": {"enabled": true, "top_k": 5, "min_similarity": 0.6},
+  "semantic_dedupe": {"enabled": true, "min_similarity": 0.80}
+}
+```
+- Verify: check `recall-pack.json` for `"semantic_enhanced": true`
+
 ### Operating Workflow
 
 ```bash

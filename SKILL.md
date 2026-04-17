@@ -22,6 +22,33 @@ Treat Mnemosyne Evolve as a separate layer above `mnemosyne-pro`.
 - Write all experimental outputs under `.mnemosyne-evolve/`.
 - Promote only after review.
 
+## Operation Modes
+
+### Core Mode (Default)
+- **Enabled by default** - no additional configuration needed
+- Keyword-based pattern matching
+- No embedding dependency
+- Full workflow: ingest → synthesize → approve → recall → report
+
+### Enhanced Mode (Optional)
+- **Manual activation required**
+- Requires embedding service (BGE-M3)
+- Features: semantic recall, semantic clustering, semantic classification
+- To enable, add to `.mnemosyne-evolve/config.jsonc`:
+```jsonc
+{
+  "semantic_recall": {
+    "enabled": true,
+    "top_k": 5,
+    "min_similarity": 0.6
+  },
+  "semantic_dedupe": {
+    "enabled": true,
+    "min_similarity": 0.80
+  }
+}
+```
+
 ## Supported input signals
 
 Version 1.1 observes exactly these signal classes:
