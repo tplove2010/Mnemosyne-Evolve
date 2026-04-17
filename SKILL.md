@@ -107,13 +107,13 @@ This skill stores all experimental state here:
 
 Use this sequence:
 
-1. Run `scripts/init_runtime.py <workspace>` once.
-2. Ingest normalized events with `scripts/ingest_event.py <workspace> <event-file>`.
-3. Run `scripts/synthesize_patterns.py <workspace>`.
+1. Run `scripts/evolve/init_runtime.py <workspace>` once.
+2. Ingest normalized events with `scripts/evolve/ingest_event.py <workspace> <event-file>`.
+3. Run `scripts/evolve/synthesize_patterns.py <workspace>`.
 4. Review `.mnemosyne-evolve/review/evolution-candidates.md`.
-5. Approve selected candidates with `scripts/approve_patterns.py <workspace> --ids ... --apply`.
-6. Build a task recall pack with `scripts/build_recall_pack.py <workspace> --query "..."`.
-7. Run `scripts/report_status.py <workspace>`.
+5. Approve selected candidates with `scripts/evolve/approve_patterns.py <workspace> --ids ... --apply`.
+6. Build a task recall pack with `scripts/evolve/build_recall_pack.py <workspace> --query "..."`.
+7. Run `scripts/evolve/report_status.py <workspace>`.
 
 ## Output classes
 
@@ -157,22 +157,22 @@ Prefer repeated signals or explicit statements.
 
 ## Scripts
 
-### `scripts/init_runtime.py`
+### `scripts/evolve/init_runtime.py`
 Create the `.mnemosyne-evolve/` runtime layout and default config without overwriting existing content.
 
-### `scripts/ingest_event.py`
+### `scripts/evolve/ingest_event.py`
 Normalize a markdown or json event and store it under `.mnemosyne-evolve/inbox/`.
 
-### `scripts/synthesize_patterns.py`
+### `scripts/evolve/synthesize_patterns.py`
 Read inbox events and build candidate patterns scored by repetition, explicitness, outcome, and style fit.
 
-### `scripts/approve_patterns.py`
+### `scripts/evolve/approve_patterns.py`
 Move reviewed candidate ids into approved patterns under `.mnemosyne-evolve/patterns/` and write an audit log.
 
-### `scripts/build_recall_pack.py`
+### `scripts/evolve/build_recall_pack.py`
 Build a compact recall pack for a task query from approved experimental patterns.
 
-### `scripts/report_status.py`
+### `scripts/evolve/report_status.py`
 Write a status report covering inbox size, candidate counts, approved patterns, and recall artifacts.
 
 ## References
