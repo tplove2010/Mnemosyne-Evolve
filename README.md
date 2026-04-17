@@ -94,8 +94,12 @@ python ~/.openclaw/workspace/scripts/evolve/init_runtime.py ~/.openclaw/workspac
 - To enable, add to `.mnemosyne-evolve/config.jsonc`:
 ```json
 {
-  "semantic_recall": {"enabled": true, "top_k": 5, "min_similarity": 0.6},
-  "semantic_dedupe": {"enabled": true, "min_similarity": 0.80}
+  // Pattern merging
+  "semantic_pattern_merge": {"enabled": true, "min_similarity": 0.80},
+  // Event type classification
+  "semantic_event_classification": {"enabled": true},
+  // Semantic recall
+  "semantic_recall": {"enabled": true, "top_k": 5, "min_similarity": 0.6}
 }
 ```
 - Verify: check `recall-pack.json` for `"semantic_enhanced": true`

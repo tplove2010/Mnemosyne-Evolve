@@ -35,19 +35,29 @@ Treat Mnemosyne Evolve as a separate layer above `mnemosyne-pro`.
 - Requires embedding service (BGE-M3)
 - Features: semantic recall, semantic clustering, semantic classification
 - To enable, add to `.mnemosyne-evolve/config.jsonc`:
+**Enhanced Mode** is for Evolve-specific semantic capabilities (different from Pro):
+
 ```jsonc
 {
+  // Pattern merging based on semantic similarity
+  "semantic_pattern_merge": {
+    "enabled": true,
+    "min_similarity": 0.80
+  },
+  // Auto-classify event types using embedding
+  "semantic_event_classification": {
+    "enabled": true
+  },
+  // Semantic recall (keyword + embedding hybrid)
   "semantic_recall": {
     "enabled": true,
     "top_k": 5,
     "min_similarity": 0.6
-  },
-  "semantic_dedupe": {
-    "enabled": true,
-    "min_similarity": 0.80
   }
 }
 ```
+
+**Verification**: Check `recall-pack.json` for `"semantic_enhanced": true`
 
 ## Supported input signals
 
