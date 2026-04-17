@@ -3,7 +3,7 @@ name: mnemosyne-evolve
 description: observe recurring work signals and build an experimental self-improvement layer for openclaw without writing directly to memory.md. use when chatgpt needs to summarize success and failure patterns, extract style-fit heuristics, build workflow recommendations, generate recall packs before a task, or propose evolution candidates from feishu conversations, heartbeat summaries, session compaction summaries, execution outcomes, and published mnemosyne memory.
 ---
 
-# Mnemosyne Evolve 1.0
+# Mnemosyne Evolve 1.1
 
 ## Overview
 
